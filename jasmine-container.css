@@ -1,0 +1,42 @@
+body {
+  overflow-y: auto;
+}
+
+#jasmine-reporter-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9998;
+  display: none;
+  overflow-y: auto;
+  box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.16);
+}
+
+#jasmine-reporter-container.show {
+  display: block;
+}
+
+#jasmine-reporter-container .jasmine_html-reporter {
+  min-height: 100%;
+  margin: 0;
+}
+
+#jasmine-reporter-toggle {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  cursor: pointer;
+  z-index: 9999;
+  display: none;
+  padding: 0.3em 0.7em;
+  background: #007069;
+  color: white;
+  margin-right: 5px;
+  font-family: Monaco, "Lucida Console", monospace;
+}
+
+#jasmine-reporter-toggle.show {
+  display: block;
+}
