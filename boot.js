@@ -65,7 +65,7 @@ jsApiReporter = jasmineInterface.jsApiReporter;
 // Since this is a debug package, the above elements might not be available
 // when exported, so let's provide a function with which athe app can add
 // directly to global name space.
-jasmine.setGlobals = function(globalObj) {
+jasmine.addToGlobal = function(globalObj) {
   if (! globalObj) {
     if (Meteor.isServer) {
       globalObj = global;
@@ -218,3 +218,6 @@ else if (Meteor.isServer) { // Use console reporter
   }
 }
 
+if (getSetting("addToGlobal", false)) {
+  jasmine.addToGlobal();
+}
