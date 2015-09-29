@@ -3,10 +3,15 @@
 </body>
 
 <template name="jasmineReporterContainer">
-  <div id="jasmine-reporter-container">
+  {{!-- Keep div around (but hidden) before jasmine starts in case our callback
+    to show container isn't trigger until after Jasmine tests art --}}
+  <div id="jasmine-reporter-container" style="display:none">
   </div>
 
-  <div id="jasmine-reporter-toggle">
-    Tests
-  </div>
+  {{#if jasmineStarted}}
+    <div id="jasmine-reporter-toggle"
+         class="{{#if hasFailures}}has-failures{{/if}}">
+      Tests
+    </div>
+  {{/if}}
 </template>

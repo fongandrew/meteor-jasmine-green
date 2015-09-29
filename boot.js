@@ -137,11 +137,19 @@ if (Meteor.isClient) {
     timer: new jasmine.Timer()
   });
 
+  // Add a simple wrapper that adds callbacks when jasmine is done
+
+
   /**
    * The `jsApiReporter` also receives spec results, and is used by any
    * environment that needs to extract the results  from JavaScript.
    */
   env.addReporter(jasmineInterface.jsApiReporter);
+
+  /* global callbackReporter: false */
+  // Defined in the jasmine-container.js file. Used to update reactive vars.
+  env.addReporter(callbackReporter);
+
   env.addReporter(htmlReporter);
 
   /**
@@ -174,8 +182,6 @@ if (Meteor.isClient) {
    * all of the specs are loaded.
    */
   jasmine.run = function() {
-    document.getElementById("jasmine-reporter-container").className = "show";
-    document.getElementById("jasmine-reporter-toggle").className = "show";
     htmlReporter.initialize();
     env.execute();
   };

@@ -16,16 +16,17 @@ Package.onUse(function(api) {
   'use strict';
   api.versionsFrom('METEOR@1.1.0.3');
   api.use('templating', 'client');
+  api.use('reactive-var', 'client');
 
   // Add client files manually (for server, use Npm.require)
   api.addFiles([
+    'jasmine-container.html',
+    'jasmine-container.js',
     'jasmine.js',
     'jasmine-global-hack.js',
     'jasmine-html.js',
     'jasmine.css',
-    'jasmine-container.html',
-    'jasmine-container.css',
-    'jasmine-container.js'
+    'jasmine-container.css' // Goes after jasmine.css to override some things
   ], 'client');
 
   // Config
