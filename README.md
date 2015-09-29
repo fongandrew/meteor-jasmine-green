@@ -23,40 +23,39 @@ Getting Started
 
 Install with `meteor install fongandrew:jasmine-green`.
 
-Then launch Meteor with the following variables in your settings.json.
-
-```
-"jasmine": {
-  "serverTestOnStart": true,
-  "addToGlobal": true
-},
-
-"public": {
-  "jasmine": {
-    "clientTestOnStart": true,
-    "addToGlobal": true
-  }
-}
-```
-
-Place your Jasmine tests in top-level code, and they'll be run when Meteor
-starts.
+Then launch Meteor with the following variables in your settings.json. Place
+your Jasmine tests in top-level code, and they'll be run when Meteor starts.
 
 
 Additional Configuration
 ------------------------
 
-The `jasmine` object in the settings.json file controls tests on the server,
-whereas settinggs on `public.jasmine` are used to configure client tests.
+You can pass the following additional options via a settings.json file to
+prevent Jasmine tests from running automatically on the server and client
+respectively:
 
-If `serverTestOnStart` or `clientTestOnTest` is set to true, this package
-will run tests on start. You can  also manually trigger tests for either
-the client or server by calling `jasmine.run()`. Note that calling
-`jasmine.run()` multiple times without restarting the server or reloading the
-client may report the same spec multiple times.
+```
+{
+  "jasmine": {
+    "serverTestOnStart": false,
+  },
 
-Because this is a "debugOnly" package, by default, exported Jasmine interface
-variables like "it" and "describe" are namespaced under the
-`Package['fongandrew:jasmine-green']` object. Setting "addToGlobal" to true
-will cause the package to add Jasmine's interface variables to the global
-or window object so you can write tests like your normally do.
+  "public": {
+    "jasmine": {
+      "clientTestOnStart": false
+    }
+  }
+}
+```
+
+If you configured tests to not autoamtically start, you can manually trigger
+tests for either the client or server by calling `jasmine.run()`. Note that
+calling `jasmine.run()` multiple times without restarting the server or
+reloading the client may report the same spec multiple times.
+
+Production
+----------
+This is a "debugOnly" package, by default, so variables added by this package
+will not be available in production. Be sure to isolate your tests so they're
+also excluded from production or at least not dependent on variables like
+"jasmine" and "describe" being available.

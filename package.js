@@ -29,23 +29,11 @@ Package.onUse(function(api) {
     'jasmine-container.css' // Goes after jasmine.css to override some things
   ], 'client');
 
-  // Config
+  // Config, boot Jasmine into globals
   api.addFiles('boot.js', ['client', 'server']);
 
-  api.export(['jasmine',
-              'describe',
-              'xdescribe',
-              'fdescribe',
-              'it',
-              'xit',
-              'fit',
-              'beforeEach',
-              'afterEach',
-              'beforeAll',
-              'afterAll',
-              'expect',
-              'pending',
-              'fail',
-              'spyOn',
-              'jsApiReporter'], ['client', 'server']);
+  // NB: Because this is a "debugOnly" package, exported variables would only
+  // be available under the `Package['fongandrew:jasmine-green']` object. That
+  // makes for some ugly test code, so in boot.js, we directly modify the
+  // window and global object for client and server respectively.
 });

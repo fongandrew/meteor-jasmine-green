@@ -31,40 +31,9 @@ jasmine = jasmineRequire.core(jasmineRequire);
 var env = jasmine.getEnv();
 var jasmineInterface = jasmineRequire.interface(jasmine, env);
 
-/* global describe: true,
-          xdescribe: true,
-          fdescribe: true,
-          it: true,
-          xit: true,
-          fit: true,
-          beforeEach: true,
-          afterEach: true,
-          beforeAll: true,
-          afterAll: true,
-          expect: true,
-          pending: true,
-          fail: true,
-          spyOn: true,
-          jsApiReporter: true */
-describe = jasmineInterface.describe;
-xdescribe = jasmineInterface.xdescribe;
-fdescribe = jasmineInterface.fdescribe;
-it = jasmineInterface.it;
-xit = jasmineInterface.xit;
-fit = jasmineInterface.fit;
-beforeEach = jasmineInterface.beforeEach;
-afterEach = jasmineInterface.afterEach;
-beforeAll = jasmineInterface.beforeAll;
-afterAll = jasmineInterface.afterAll;
-expect = jasmineInterface.expect;
-pending = jasmineInterface.pending;
-fail = jasmineInterface.fail;
-spyOn = jasmineInterface.spyOn;
-jsApiReporter = jasmineInterface.jsApiReporter;
-
-// Since this is a debug package, the above elements might not be available
-// when exported, so let's provide a function with which athe app can add
-// directly to global name space.
+// Since this is a debug package, we can't make Jasmine's helpers available
+// via a normal export, so let's modify the global and window object directly
+// (the horror!).
 jasmine.addToGlobal = function(globalObj) {
   if (! globalObj) {
     if (Meteor.isServer) {
@@ -186,7 +155,7 @@ if (Meteor.isClient) {
     env.execute();
   };
 
-  if (getSetting("clientTestOnStart", false)) {
+  if (getSetting("clientTestOnStart", true)) {
     Meteor.startup(function() {
       jasmine.run();
     });
@@ -217,13 +186,13 @@ else if (Meteor.isServer) { // Use console reporter
     });
   };
 
-  if (getSetting("serverTestOnStart", false)) {
+  if (getSetting("serverTestOnStart", true)) {
     Meteor.startup(function() {
       jasmine.run();
     });
   }
 }
 
-if (getSetting("addToGlobal", false)) {
+if (getSetting("addToGlobal", true)) {
   jasmine.addToGlobal();
 }
