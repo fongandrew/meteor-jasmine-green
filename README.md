@@ -9,7 +9,7 @@ but if you don't want/need things like mirrors and browser automation, or
 if you're just having trouble getting Velocity running, this package offers a
 fairly barebones Jasmine setup you can use as a starting point. It's not ideal
 for maintaining a large, well-tested app, but if you just need the Jasmine
-equivalent of TinyTest, but for your app, this could work.
+equivalent of TinyTest outside of the package context this could work.
 
 This package includes the console-based test reporter included with Jasine's
 NPM package for server-side tests and the HTMLReporter that comes included with
